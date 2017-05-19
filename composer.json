@@ -1,0 +1,6 @@
+{
+  "_comment": "composer configuration for the Intro_2_Phalcon web app poc",
+  "require": {
+    "phalcon/devtools": "dev-master"
+  }
+}
