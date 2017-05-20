@@ -14,7 +14,7 @@
 
 <div class="page-header">
     <h1>
-        Create contacts
+        Create a contact
     </h1>
 </div>
 
@@ -47,17 +47,30 @@
 <div class="form-group">
     <label for="fieldPhone" class="col-sm-2 control-label">Phone</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->selectStatic(["phone", [], "class" => "form-control", "id" => "fieldPhone"]) ?>
+        <?php echo $this->tag->textField(["phone", "size" => 30, "class" => "form-control", "id" => "fieldPhone"]) ?>
     </div>
 </div>
 
 <div class="form-group">
     <label for="fieldType" class="col-sm-2 control-label">Type</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["type", "size" => 30, "class" => "form-control", "id" => "fieldType"]) ?>
+
+<!--  ** Hard way without Volt. **
+        <?php echo $this->tag->selectStatic(["type", [ "W" => "Work", "P" => "Personal"], "class" => "form-control", "id" => "fieldType"]) ?>
+-->
+
+<!-- Easy way with Volt syntax -->
+        {{ select_static( 'type', 
+            [
+                "Family" : "Family", 
+                "School" : "School",
+                "Work"   : "Work", 
+                "SPAM"   : "SPAM"
+            ],
+            'useEmpty': true, 'emptyText': 'Select Contact Type')
+         }}
     </div>
 </div>
-
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

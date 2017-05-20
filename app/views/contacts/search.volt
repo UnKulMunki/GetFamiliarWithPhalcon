@@ -26,10 +26,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Type</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Type</th>
 
                 <th></th>
                 <th></th>
@@ -39,10 +39,10 @@
         <?php foreach ($page->items as $contact): ?>
             <tr>
                 <td><?php echo $contact->id ?></td>
-            <td><?php echo $contact->name ?></td>
-            <td><?php echo $contact->email ?></td>
-            <td><?php echo $contact->phone ?></td>
-            <td><?php echo $contact->type ?></td>
+                <td><?php echo $contact->name ?></td>
+                <td><?php echo $contact->email ?></td>
+                <td><?php echo $contact->phone ?></td>
+                <td><?php echo $contact->type ?></td>
 
                 <td><?php echo $this->tag->linkTo(["contacts/edit/" . $contact->id, "Edit"]); ?></td>
                 <td><?php echo $this->tag->linkTo(["contacts/delete/" . $contact->id, "Delete"]); ?></td>
