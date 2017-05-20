@@ -1,7 +1,16 @@
 <?php
 
 use Phalcon\Validation;
-use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
+use Phalcon\Validation\Validator\Regex;
+use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\StringLength;
+/**
+ * This validator is only for use with Phalcon\Mvc\Collection. If you are using
+ * Phalcon\Mvc\Model, please use the validators provided by Phalcon\Validation.
+ *      (Specifically "Phalcon\Validation\Validator\Email")
+ *             \\use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
+ */
+use Phalcon\Validation\Validator\Email as EmailValidator;
 
 class Contacts extends \Phalcon\Mvc\Model
 {
@@ -168,14 +177,87 @@ class Contacts extends \Phalcon\Mvc\Model
         $validator = new Validation();
 
         $validator->add(
-            'email',
-            new EmailValidator(
+            'name',
+            new PresenceOf(
                 [
-                    'model'   => $this,
-                    'message' => 'Please enter a correct email address',
+                    'model'        => $this,
+                    'message'      => 'Please enter the contact name',
+                    'cancelOnFail' => true,
                 ]
             )
         );
+
+        $validator->add(
+            'email',
+            new PresenceOf(
+                [
+                    'model'        => $this,
+                    'message'      => 'Please enter the contact email address',
+                    'cancelOnFail' => true,
+                ]
+            )
+        );
+
+        $validator->add(
+            'phone',
+            new PresenceOf(
+                [
+                    'model'        => $this,
+                    'message'      => 'Please enter the contact telephone number',
+                    'cancelOnFail' => true,
+                ]
+            )
+        );
+
+
+        $validator->add(
+            'type',
+            new PresenceOf(
+                [
+                    'model'        => $this,
+                    'message'      => 'Please enter the contact type',
+                    'cancelOnFail' => true,
+                ]
+            )
+        );
+
+
+
+        $validator->add(
+            "name",
+            new StringLength(
+                [
+                    "min"            => 2,
+                    "max"            => 20,
+                    "messageMinimum" => "The name is too short",
+                    "messageMaximum" => "The name is too long (max 20)",
+                 ]
+            )
+        );
+
+        $validator->add(
+            'email',
+            new EmailValidator(
+                [
+                    'model'        => $this,
+                    'message'      => 'Please enter a valid email address',
+                ]
+            )
+        );
+
+
+        $validator->add(
+            "phone",
+            new StringLength(
+                [
+                    "min"            => 5,
+                    "max"            => 14,
+                    "messageMinimum" => "The telephone is too short",
+                    "messageMaximum" => "The telephone is too long (max 14)",
+                 ]
+            )
+        );
+
 
         return $this->validate($validator);
     }
@@ -227,5 +309,5 @@ class Contacts extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-	
+
 }
