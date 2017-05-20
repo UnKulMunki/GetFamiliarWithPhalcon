@@ -9,7 +9,7 @@ $loader->registerDirs(
     [
         $config->application->controllersDir,
         $config->application->modelsDir,
-        // GxC: added because composer puts files in "vendor" on the BASE_PATH by default. 
+        // GxC: added because composer like 2 put files in "vendor" on the BASE_PATH by default. 
         $config->application->vendorDir
     ]
 )->register();
