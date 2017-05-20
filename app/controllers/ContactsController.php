@@ -79,7 +79,9 @@ class ContactsController extends ControllerBase
      */
     public function newAction()
     {
-
+        /**
+         * This does nothing other than display the template.
+         */
     }
 
     /**
@@ -113,6 +115,15 @@ class ContactsController extends ControllerBase
             $this->tag->setDefault("phone", $contact->phone);
             $this->tag->setDefault("type", $contact->type);
             
+        } else {
+            $this->flash->error("Invalid Request");
+            $this->dispatcher->forward(
+                [
+                'controller' => "contacts",
+                'action' => 'index'
+                ]
+            );
+            return;
         }
     }
 
@@ -165,10 +176,10 @@ class ContactsController extends ControllerBase
     }
 
     /**
-     * Saves a contact edited
+     * Updates (Save) an edited contact
      *
      */
-    public function saveAction()
+    public function updateAction()
     {
 
         if (!$this->request->isPost()) {
